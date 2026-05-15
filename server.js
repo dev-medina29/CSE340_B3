@@ -30,16 +30,19 @@ app.set("views", path.join(__dirname, "src/views"));
 /**
  * Routes
  */
-app.get("/", (req, res) => {
-  res.render("home");
+app.get("/", async (req, res) => {
+  const title = "Home";
+  res.render("home", { title });
 });
 
-app.get("/organizations.html", (req, res) => {
-  res.render("organizations");
+app.get("/organizations", async (req, res) => {
+  const title = "Our Partner Organizations";
+  res.render("organizations", { title });
 });
 
-app.get("/projects", (req, res) => {
-  res.sendFile(path.join(__dirname, "src/views/projects.html"));
+app.get("/projects", async (req, res) => {
+  const title = "Service Projects";
+  res.render("projects", { title });
 });
 
 app.listen(PORT, () => {
@@ -47,5 +50,5 @@ app.listen(PORT, () => {
   console.log(`Environment: ${NODE_ENV}`);
   console.log(__filename);
   console.log(__dirname);
-  console.log(path.join(__dirname, "src/views/home.html"));
+  console.log(path.join(__dirname, "src/views/home.ejs"));
 });
