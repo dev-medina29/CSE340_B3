@@ -3,6 +3,7 @@ import { testConnection } from "./src/models/db.js";
 import db from "./src/models/db.js";
 import { getAllOrganizations } from "./src/models/organizations.js";
 import { getAllProjects } from "./src/models/projects.js";
+import { getAllCategories } from "./src/models/categories.js";
 import { fileURLToPath } from "url";
 import path from "path";
 
@@ -46,6 +47,7 @@ app.get("/organizations", async (req, res) => {
   res.render("organizations", { title, organizations });
 });
 
+
 app.get("/projects", async (req, res) => {
   const projects = await getAllProjects();
   console.log("Projects:", projects);
@@ -54,7 +56,8 @@ app.get("/projects", async (req, res) => {
 });
 app.get("/categories", async (req, res) => {
   const title = "Categories of Service";
-  res.render("categories", { title });
+  const categories = await getAllCategories();
+  res.render("categories", { title, categories });
 });
 
 app.listen(PORT, async () => {

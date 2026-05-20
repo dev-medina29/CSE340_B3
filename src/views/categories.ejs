@@ -4,12 +4,12 @@
             <%= title %>
         </h1>
         <ul>
-            <li>Environmental</li>
-            <li>Educational</li>
-            <li>Community Service</li>
-            <li>Health and Wellness</li>
+            <% categories.forEach(cat=>{ %>
+                <li>
+                    <%= cat.name %>
+                </li>
+                <%})%>
         </ul>
-
 
     </main>
 
