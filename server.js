@@ -2,6 +2,7 @@ import express from "express";
 import { testConnection } from "./src/models/db.js";
 import db from "./src/models/db.js";
 import { getAllOrganizations } from "./src/models/organizations.js";
+import { getAllProjects } from "./src/models/projects.js";
 import { fileURLToPath } from "url";
 import path from "path";
 
@@ -46,8 +47,10 @@ app.get("/organizations", async (req, res) => {
 });
 
 app.get("/projects", async (req, res) => {
+  const projects = await getAllProjects();
+  console.log("Projects:", projects);
   const title = "Service Projects";
-  res.render("projects", { title });
+  res.render("projects", { title, projects });
 });
 app.get("/categories", async (req, res) => {
   const title = "Categories of Service";
