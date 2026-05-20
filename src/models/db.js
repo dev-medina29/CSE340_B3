@@ -13,7 +13,9 @@ import { Pool } from "pg";
  */
 const pool = new Pool({
   connectionString: process.env.DB_URL,
-  ssl: true,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 /**
@@ -82,11 +84,16 @@ if (
  */
 const testConnection = async () => {
   try {
+    if (!process.env.DB_URL) {
+      console.error("CRITICAL: DB_URL environment variable is not set!");
+      throw new Error("Missing DB_URL environment variable");
+    }
     const result = await db.query("SELECT NOW() as current_time");
     console.log("Database connection successful:", result.rows[0].current_time);
     return true;
   } catch (error) {
     console.error("Database connection failed:", error.message);
+    console.error("Full error:", error);
     throw error;
   }
 };
