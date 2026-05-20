@@ -36,28 +36,57 @@ app.set("views", path.join(__dirname, "src/views"));
  * Routes
  */
 app.get("/", async (req, res) => {
-  const title = "Home";
-  res.render("home", { title });
+  try {
+    const title = "Home";
+    res.render("home", { title });
+  } catch (error) {
+    console.error("Error rendering home page:", error);
+    res.status(500).render("error", { message: "Internal server error" });
+  }
 });
 
 app.get("/organizations", async (req, res) => {
-  const organizations = await getAllOrganizations();
-  console.log("Organizations:", organizations);
-  const title = "Our Partner Organizations";
-  res.render("organizations", { title, organizations });
+  try {
+    const organizations = await getAllOrganizations();
+    console.log("Organizations:", organizations);
+    const title = "Our Partner Organizations";
+    res.render("organizations", { title, organizations });
+  } catch (error) {
+    console.error("Error fetching organizations:", error);
+    res
+      .status(500)
+      .render("error", { message: "Failed to load organizations" });
+  }
 });
-
 
 app.get("/projects", async (req, res) => {
-  const projects = await getAllProjects();
-  console.log("Projects:", projects);
-  const title = "Service Projects";
-  res.render("projects", { title, projects });
+  try {
+    const projects = await getAllProjects();
+    console.log("Projects:", projects);
+    const title = "Service Projects";
+    res.render("projects", { title, projects });
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+    res.status(500).render("error", { message: "Failed to load projects" });
+  }
 });
 app.get("/categories", async (req, res) => {
-  const title = "Categories of Service";
-  const categories = await getAllCategories();
-  res.render("categories", { title, categories });
+  try {
+    const title = "Categories of Service";
+    const categories = await getAllCategories();
+    res.render("categories", { title, categories });
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    res.status(500).render("error", { message: "Failed to load categories" });
+  }
+});
+
+/**
+ * Global error handler middleware
+ */
+app.use((err, req, res, next) => {
+  console.error("Unhandled error:", err);
+  res.status(500).json({ error: "Internal server error" });
 });
 
 app.listen(PORT, async () => {
