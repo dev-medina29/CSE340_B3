@@ -1,4 +1,4 @@
-<%- include('../partials/header') %>
+<%- include('./partials/header') %>
     <main>
         <h1>Organizations</h1>
         <p>Here are a few of our partner organizations:</p>
@@ -7,10 +7,11 @@
                 <li>
                     <img src="/images/<%= org.logo %>" alt="<%= org.name %>">
                     <strong>
-                        <%= org.name %>
-                    </strong>: <%= org.email %>
+                        <a href="/organization/<%= org.organization_id %>">
+                            <%= org.name %>
+                    </strong></a>: <%= org.email %>
                 </li>
                 <% }); %>
         </ul>
     </main>
-    <%- include('../partials/footer') %>
+    <%- include('./partials/footer') %>
