@@ -18,7 +18,10 @@ export const getProjectsByCategory = async (categoryId) => {
 export const getCategoryById = async (id) => {
   const query = `select categories.name as category,category_id from categories where category_id=$1`;
   const Id = [id];
+  console.error(Id);
+  console.error(query);
   const result = await db.query(query, Id);
+  console.log(result);
   return result.rows[0];
 };
 export const getCategoriesByProject = async (projectId) => {

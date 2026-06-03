@@ -20,6 +20,6 @@ router.get("/organization/:id", showOrganizationDetailsPage);
 // error handler
 router.get("/test-error", errorsPage);
 
-// router.get("/category/:id", CategoryById);
+router.get("/category/:id", CategoryById);
 
 export default router;
