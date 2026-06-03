@@ -5,9 +5,11 @@
         </h1>
         <ul>
             <% categories.forEach(cat=>{ %>
-                <li>
-                    <%= cat.name %>
-                </li>
+                <a href="/category/<%= cat.category_id %> ">
+                    <li>
+                        <%= cat.name %>
+                    </li>
+                </a>
                 <%})%>
         </ul>
 
