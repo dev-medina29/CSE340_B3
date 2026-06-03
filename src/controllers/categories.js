@@ -19,9 +19,9 @@ export const categoriesPage = async (req, res) => {
 export const CategoryById = async (req, res) => {
   // const catId = req.query.params.id;
   const catId = 1;
-  const categ = await getCategoryById(catId);
+  // const categ = await getCategoryById(catId);
   console.log("Response", categ);
   // const projByCat = await getProjectsByCategory(categ.category_id);
   // const title = categ.category;
-  res.render("category", { title, categ });
+  res.render("category", title);
 };
