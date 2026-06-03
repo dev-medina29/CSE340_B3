@@ -3,10 +3,14 @@
         <h1>Projects</h1>
         <h2>Upcoming Service Projects</h2>
         <ul>
-            <% projects.forEach(proj=>{ %>
+            <% fiveProj.forEach(proj=>{ %>
                 <li>
                     <%= proj.date.toLocaleDateString("en-US",{ weekday: "short" , day: "2-digit" , month: "2-digit" ,
-                        year: "numeric" }) %>: <%= proj.title %>(<%= proj.name %>)
+                        year: "numeric" }) %>: <a href="/project/<%= proj.project_id %>">
+                            <%= proj.title %>
+                        </a> (<a href="/organization/<%= proj.organization_id %>">
+                            <%= proj.name %>
+                        </a>)
                 </li>
                 <%})%>
         </ul>

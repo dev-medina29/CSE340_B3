@@ -27,7 +27,17 @@ export const getProjectsByOrganizationId = async (organizationId) => {
   return result.rows;
 };
 
-export const getUpcomingProjects= async (number_of_projects)=>{
+export const getUpcomingProjects = async (number_of_projects) => {
+  const query = `select project_id,organization.name as name, organization_id, title, ServiceProjects.description, location, date from ServiceProjects join organization using(organization_id) limit $1`;
+  const num = [number_of_projects];
+  const result = await db.query(query, num);
+  return result.rows;
+};
 
-
+export const getProjectDetails = async (id) => {
+  const query = `select project_id,title,ServiceProjects.description as des,date,location,organization_id,organization.name as name from ServiceProjects join organization using(organization_id) where project_id=$1 
+  `;
+  const ID = [id];
+  const result = await db.query(query, ID);
+  return result.rows[0];
 };
