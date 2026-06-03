@@ -11,14 +11,14 @@ export const getProjectsByCategory = async (categoryId) => {
   from project_categories join categories using(category_id) 
   join ServiceProjects using(project_id) where category_id= $1`;
   const category = [categoryId];
-  const result = db.query(query, category);
+  const result = await db.query(query, category);
   return result.rows;
 };
 
 export const getCategoryById = async (id) => {
   const query = `select categories.name as category,category_id from categories where category_id=$1`;
   const Id = [id];
-  const result = db.query(query, Id);
+  const result = await db.query(query, Id);
   return result.rows[0];
 };
 export const getCategoriesByProject = async (projectId) => {
@@ -26,7 +26,7 @@ export const getCategoriesByProject = async (projectId) => {
   from project_categories join categories using(category_id) 
   join ServiceProjects using(project_id) where project_id= $1`;
   const project = [projectId];
-  const result = db.query(query, project);
+  const result = await db.query(query, project);
   return result.rows;
 };
 
