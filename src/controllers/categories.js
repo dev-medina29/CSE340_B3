@@ -18,8 +18,8 @@ export const categoriesPage = async (req, res) => {
 
 export const CategoryById = async (req, res) => {
   try {
-    // const catId = req.params.id;
-    const catId=2;
+    const catId = Number(req.params.id);
+    // const catId=2;
     const categ = await getCategoryById(catId);
     console.log("Response", categ);
     const projByCat = await getProjectsByCategory(categ.category_id);

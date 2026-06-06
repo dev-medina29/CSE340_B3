@@ -17,19 +17,19 @@ export const getProjectsByCategory = async (categoryId) => {
 
 export const getCategoryById = async (id) => {
   const query = `select categories.name as category,category_id from categories where category_id=$1`;
-  const Id = [id];
-  console.error(Id);
+  const params = [id];
+  console.error(params);
   console.error(query);
-  const result = await db.query(query, Id);
-  console.log(result);
+  const result = await db.query(query, params);
+  console.log("The result of getCategoryById function", result);
   return result.rows[0];
 };
 export const getCategoriesByProject = async (projectId) => {
   const query = `select ServiceProjects.title as service, categories.name as category, category_id 
   from project_categories join categories using(category_id) 
   join ServiceProjects using(project_id) where project_id= $1`;
-  const project = [projectId];
-  const result = await db.query(query, project);
+  const params = [projectId];
+  const result = await db.query(query, params);
   return result.rows;
 };
 
