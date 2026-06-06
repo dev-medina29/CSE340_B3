@@ -3,6 +3,7 @@ import {
   getUpcomingProjects,
   getProjectDetails,
 } from "../models/projects.js";
+import { getCategoriesByProject } from "../models/categories.js";
 export const projectsPage = async (req, res) => {
   try {
     const projects = await getAllProjects();
@@ -21,8 +22,9 @@ export const projectsPage = async (req, res) => {
 export const showProjectDetailsPage = async (req, res) => {
   // const title = "Medina tries";
   const IdValue = req.params.id;
+  const projById = await getCategoriesByProject(IdValue);
   const projectDetails = await getProjectDetails(IdValue);
   console.log("See this", projectDetails);
   const title = projectDetails.title;
-  res.render("project", { title, projectDetails });
+  res.render("project", { title, projectDetails, projById });
 };

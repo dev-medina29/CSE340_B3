@@ -16,5 +16,15 @@
         <a href="/organization/<%= projectDetails.organization_id%>">
             <%= projectDetails.name %>
         </a>
+        <p>This project is in the category:</p>
+        <ul>
+            <% projById.forEach(proje=> { %>
+                <a href="/category/<%= proje.category_id %>">
+                    <li>
+                        <%= proje.category %>
+                    </li>
+                </a>
+                <% }) %>
+        </ul>
     </main>
     <%- include('./partials/footer') %>
