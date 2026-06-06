@@ -7,7 +7,7 @@ export const getAllCategories = async () => {
 };
 // week 3 assignment ** start ***
 export const getProjectsByCategory = async (categoryId) => {
-  const query = `select ServiceProjects.title as service, categories.name as category
+  const query = `select ServiceProjects.title as service, project_id as id, categories.name as category
   from project_categories join categories using(category_id) 
   join ServiceProjects using(project_id) where category_id= $1`;
   const category = [categoryId];

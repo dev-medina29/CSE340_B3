@@ -1,6 +1,18 @@
 <%- include("./partials/header") %>
+    <h1>
+        <%= title %>
+    </h1>
+    <ul>
+        <% projByCat.forEach(proj=>{ %>
 
+            <li>
+                <a href="/project/<%= proj.id %>">
+                    <%= proj.service %>
+                </a>
+            </li>
 
+            <%})%>
+    </ul>
 
 
     <%- include('./partials/footer') %>
