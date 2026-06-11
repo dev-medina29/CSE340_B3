@@ -3,7 +3,8 @@ import { showOrganizationDetailsPage } from "./controllers/organizations.js";
 import {
   organizationsPage,
   showNewOrganizationForm,
-  processNewOrganizationForm
+  processNewOrganizationForm,
+  organizationValidation,
 } from "./controllers/organizations.js";
 import { categoriesPage, CategoryById } from "./controllers/categories.js";
 import {
@@ -30,6 +31,10 @@ router.get("/category/:id", CategoryById);
 router.get("/new-organization", showNewOrganizationForm);
 
 // Route to handle new organization form submission
-router.post("/new-organization", processNewOrganizationForm);
+router.post(
+  "/new-organization",
+  organizationValidation,
+  processNewOrganizationForm,
+);
 
 export default router;
