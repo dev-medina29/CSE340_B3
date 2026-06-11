@@ -17,7 +17,7 @@ export const getOrganizationDetails = async (organizationId) => {
         organization_id,
         name,
         description,
-        organization.email,
+        organization.email as email,
         logo
       FROM organization
       WHERE organization_id = $1;
@@ -75,7 +75,7 @@ export const updateOrganization = async (
 ) => {
   const query = `
     UPDATE organization
-    SET name = $1, description = $2, contact_email = $3, logo_filename = $4
+    SET name = $1, description = $2, email = $3, logo = $4
     WHERE organization_id = $5
     RETURNING organization_id;
   `;
