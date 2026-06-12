@@ -101,6 +101,7 @@ export const projectValidation = [
     .isISO8601()
     .withMessage("Date must be a valid date format"),
   body("organizationId")
+    .optional()
     .notEmpty()
     .withMessage("Organization is required")
     .isInt()
@@ -116,15 +117,20 @@ export const showEditProjectForm = async (req, res) => {
 };
 export const processEditProjectForm = async (req, res) => {
   const projId = req.params.id;
-  const orgId = await getProjectDetails(projId).organization_id;
+  let orgId = await getProjectDetails(projId);
+  orgId = orgId.organization_id;
+  console.log(orgId);
   // Check for validation errors
   const results = validationResult(req);
-  results.array().forEach((error) => {
-    req.flash("error", error.msg);
-  });
-  // Redirect back to the edit organization form
-  return res.redirect("/edit-project/" + req.params.id);
+  if (!results.isEmpty()) {
+    results.array().forEach((error) => {
+      req.flash("error", error.msg);
+    });
+    // Redirect back to the edit organization form
+    return res.redirect("/edit-project/" + req.params.id);
+  }
   const { title, description, location, date } = req.body;
+  console.log(title, description, location, date, projId, orgId);
 
   await updateProject(projId, title, description, location, date, orgId);
 

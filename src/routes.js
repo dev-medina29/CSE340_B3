@@ -67,6 +67,7 @@ router.get("/assign-categories/:projectId", showAssignCategoriesForm);
 router.post("/assign-categories/:projectId", processAssignCategoriesForm);
 
 router.get("/edit-project/:id", showEditProjectForm);
-router.post("/edit-project/:id", projectValidation, processEditProjectForm);
+// router.post("/edit-project/:id", projectValidation, processEditProjectForm);
+router.post("/edit-project/:id", processEditProjectForm);
 
 export default router;
