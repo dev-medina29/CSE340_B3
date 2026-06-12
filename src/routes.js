@@ -8,7 +8,12 @@ import {
   showEditOrganizationForm,
   processEditOrganizationForm,
 } from "./controllers/organizations.js";
-import { categoriesPage, CategoryById } from "./controllers/categories.js";
+import {
+  categoriesPage,
+  CategoryById,
+  showAssignCategoriesForm,
+  processAssignCategoriesForm,
+} from "./controllers/categories.js";
 import {
   projectsPage,
   showProjectDetailsPage,
@@ -53,5 +58,9 @@ router.get("/new-project", showNewProjectForm);
 
 // Route to handle new project form submission
 router.post("/new-project", processNewProjectForm);
+
+// Routes to handle the assign categories to project form
+router.get("/assign-categories/:projectId", showAssignCategoriesForm);
+router.post("/assign-categories/:projectId", processAssignCategoriesForm);
 
 export default router;

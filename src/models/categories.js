@@ -34,3 +34,39 @@ export const getCategoriesByProject = async (projectId) => {
 };
 
 // week 3 assignment ** end ***
+
+// week 4 activity
+
+export const assignCategoryToProject = async (categoryId, projectId) => {
+  const query = `
+        INSERT INTO project_categories (category_id, project_id)
+        VALUES ($1, $2);
+    `;
+
+  await db.query(query, [categoryId, projectId]);
+};
+
+export const updateCategoryAssignments = async (projectId, categoryIds) => {
+  // First, remove existing category assignments for the project
+  const deleteQuery = `
+        DELETE FROM project_categories
+        WHERE project_id = $1;
+    `;
+  await db.query(deleteQuery, [projectId]);
+
+  // Next, add the new category assignments
+  for (const categoryId of categoryIds) {
+    await assignCategoryToProject(categoryId, projectId);
+  }
+};
+
+export const getCategoriesByServiceProjectId = async (projectId) => {
+  const query = `select categories.category_id, categories.name as category
+  from project_categories join categories using(category_id)
+  where project_id = $1`;
+  const params = [projectId];
+  const result = await db.query(query, params);
+  return result.rows;
+};
+
+// week 4 activity **end**

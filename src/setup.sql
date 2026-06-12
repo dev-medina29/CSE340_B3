@@ -34,6 +34,8 @@ VALUES
     date DATE,
     FOREIGN KEY (organization_id) REFERENCES organization(organization_id)
 );
+-- Add the code to make the project_id serial;
+
 
 -- BrightFuture Builders Projects
 INSERT INTO ServiceProjects (project_id,organization_id, title, description, location, date) VALUES

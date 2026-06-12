@@ -3,7 +3,10 @@ import {
   getProjectsByCategory,
   getCategoryById,
   getCategoriesByProject,
+  getCategoriesByServiceProjectId,
+  updateCategoryAssignments,
 } from "../models/categories.js";
+import { getProjectDetails } from "../models/projects.js";
 
 export const categoriesPage = async (req, res) => {
   try {
@@ -30,3 +33,37 @@ export const CategoryById = async (req, res) => {
     res.status(500).render("error", { message: "Failed to load category" });
   }
 };
+
+// week 4 activity
+export const showAssignCategoriesForm = async (req, res) => {
+  const projectId = req.params.projectId;
+
+  const projectDetails = await getProjectDetails(projectId);
+  const categories = await getAllCategories();
+  const assignedCategories = await getCategoriesByServiceProjectId(projectId);
+
+  const title = "Assign Categories to Project";
+
+  res.render("assign-categories", {
+    title,
+    projectId,
+    projectDetails,
+    categories,
+    assignedCategories,
+  });
+};
+
+export const processAssignCategoriesForm = async (req, res) => {
+  const projectId = req.params.projectId;
+  const selectedCategoryIds = req.body.categoryIds || [];
+
+  // Ensure selectedCategoryIds is an array
+  const categoryIdsArray = Array.isArray(selectedCategoryIds)
+    ? selectedCategoryIds
+    : [selectedCategoryIds];
+  await updateCategoryAssignments(projectId, categoryIdsArray);
+  req.flash("success", "Categories updated successfully.");
+  res.redirect(`/project/${projectId}`);
+};
+
+// week 4 activity ** end **
