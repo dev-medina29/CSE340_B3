@@ -112,7 +112,7 @@ export const showEditProjectForm = async (req, res) => {
   const projDet = await getProjectDetails(projId);
   const organizations = await getAllOrganizations();
   const title = "Edit Project";
-  res.render("edit-project", { title, projDet, organizations });
+  res.render("edit-project", { title, projDet, organizations, projId });
 };
 export const processEditProjectForm = async (req, res) => {
   const projId = req.params.id;
