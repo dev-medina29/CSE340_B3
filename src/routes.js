@@ -13,6 +13,11 @@ import {
   CategoryById,
   showAssignCategoriesForm,
   processAssignCategoriesForm,
+  showNewCategoryForm,
+  processNewCategoryForm,
+  showEditCategoryForm,
+  processEditCategoryForm,
+  categoryValidation,
 } from "./controllers/categories.js";
 import {
   projectsPage,
@@ -38,6 +43,14 @@ router.get("/organization/:id", showOrganizationDetailsPage);
 router.get("/test-error", errorsPage);
 
 router.get("/category/:id", CategoryById);
+
+// Routes for new category page
+router.get("/new-category", showNewCategoryForm);
+router.post("/new-category", categoryValidation, processNewCategoryForm);
+
+// Routes for edit category page
+router.get("/edit-category/:id", showEditCategoryForm);
+router.post("/edit-category/:id", categoryValidation, processEditCategoryForm);
 
 // Route for new organization page
 router.get("/new-organization", showNewOrganizationForm);
