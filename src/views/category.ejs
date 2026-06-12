@@ -1,18 +1,22 @@
 <%- include("./partials/header") %>
-    <h1>
-        <%= title %>
-    </h1>
-    <ul>
-        <% projByCat.forEach(proj=>{ %>
+    <main>
+        <h1>
+            <%= title %>
+        </h1>
+        <ul>
+            <% projByCat.forEach(proj=>{ %>
 
-            <li>
-                <a href="/project/<%= proj.id %>">
-                    <%= proj.service %>
-                </a>
-            </li>
+                <li>
+                    <a href="/project/<%= proj.id %>">
+                        <%= proj.service %>
+                    </a>
+                </li>
 
-            <%})%>
-    </ul>
+                <%})%>
+        </ul>
+        <a> Edit category </a>
+    </main>
+
 
 
     <%- include('./partials/footer') %>

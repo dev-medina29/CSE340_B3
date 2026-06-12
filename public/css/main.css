@@ -216,3 +216,106 @@ footer p {
   color: #0c5460; /* Dark blue */
   border: 1px solid #bee5eb;
 }
+
+/* General link styles */
+a {
+  color: #1e5ba8;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: #0f2348;
+  text-decoration: underline;
+  transform: translateX(2px);
+}
+
+a:active {
+  color: #0a1829;
+}
+
+/* Links in footer or at bottom */
+main a,
+footer a {
+  color: #1e5ba8;
+  padding: 4px 2px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+main a:hover,
+footer a:hover {
+  background-color: rgba(30, 91, 168, 0.1);
+  color: #0f2348;
+  text-decoration: underline;
+}
+
+/* Button container styles */
+.button-container {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.btn-action {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #1e5ba8;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 2px solid #1e5ba8;
+}
+
+.btn-action:hover {
+  background-color: #0f2348;
+  border-color: #0f2348;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(15, 35, 72, 0.2);
+  text-decoration: none !important;
+}
+
+.btn-action:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(15, 35, 72, 0.1);
+}
+
+/* Form submit button styles */
+button[type="submit"],
+button {
+  display: inline-block;
+  padding: 12px 28px;
+  background-color: #1e5ba8;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 16px;
+}
+
+button[type="submit"]:hover,
+button:hover {
+  background-color: #0f2348;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(15, 35, 72, 0.2);
+}
+
+button[type="submit"]:active,
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(15, 35, 72, 0.1);
+}
+
+button[type="submit"]:disabled,
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+}
