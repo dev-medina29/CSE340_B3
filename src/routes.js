@@ -12,6 +12,8 @@ import { categoriesPage, CategoryById } from "./controllers/categories.js";
 import {
   projectsPage,
   showProjectDetailsPage,
+  processNewProjectForm,
+  showNewProjectForm,
 } from "./controllers/projects.js";
 import { homePage } from "./controllers/index.js";
 import { errorsPage } from "./controllers/errors.js";
@@ -45,5 +47,11 @@ router.post(
   organizationValidation,
   processEditOrganizationForm,
 );
+
+// Route for new project page
+router.get("/new-project", showNewProjectForm);
+
+// Route to handle new project form submission
+router.post("/new-project", processNewProjectForm);
 
 export default router;
