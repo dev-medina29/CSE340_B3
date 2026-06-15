@@ -26,9 +26,11 @@
                 </a>
                 <% }) %>
         </ul>
-        <div class="button-container">
-            <a href="/assign-categories/<%= projectDetails.project_id %>" class="btn-action">Edit Categories</a>
-            <a href="/edit-project/<%= projectDetails.project_id %>" class="btn-action">Edit Project</a>
-        </div>
+        <% if (user && user.role_name==='admin' ) { %>
+            <div class="button-container">
+                <a href="/assign-categories/<%= projectDetails.project_id %>" class="btn-action">Edit Categories</a>
+                <a href="/edit-project/<%= projectDetails.project_id %>" class="btn-action">Edit Project</a>
+            </div>
+            <% } %>
     </main>
     <%- include('./partials/footer') %>

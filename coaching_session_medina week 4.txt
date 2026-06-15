@@ -1,0 +1,37 @@
+Learning Coach Session Transcript
+
+Coach: Welcome! Just to be clear from the start, this is a coaching session, not a test. It is perfectly okay—and even encouraged—to say ‘I don’t know’ or ‘I made a mistake.’ That's the fastest way we'll learn today.
+
+Coach: What name would you like me to use for you during this session?
+User: medina
+
+Coach: Please paste a non-trivial code snippet where your server handles a form submission.
+User: [processEditCategoryForm code]
+
+Coach: When this line runs — const { name } = req.body; — where exactly does that data come from?
+User: the data will come from a form...
+
+Coach: In your form, what is the name attribute and why must it match?
+User: I don't understand
+
+Coach: (Explanation given)
+
+Coach: What happens if we use res.render() and refresh?
+User: we may have duplicate form submissions
+
+Coach: Please paste your EJS edit form snippet.
+User: [EJS form code]
+
+Coach: Why pre-fill input values?
+User: to show existing data
+
+Coach: Please paste flash/session setup.
+User: [flash middleware code]
+
+Coach: Please paste validation code.
+User: [validation code]
+
+Coach: Why use .trim() before .notEmpty()?
+User: to remove space before checking emptiness
+
+End of Session.

@@ -14,9 +14,11 @@
 
                 <%})%>
         </ul>
-        <div class="button-container">
-            <a href="/edit-category/<%= categ.category_id %>" class="btn-action">Edit Category</a>
-        </div>
+        <% if (user && user.role_name==='admin' ) { %>
+            <div class="button-container">
+                <a href="/edit-category/<%= categ.category_id %>" class="btn-action">Edit Category</a>
+            </div>
+            <% } %>
     </main>
 
 

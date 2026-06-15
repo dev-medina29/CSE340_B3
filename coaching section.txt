@@ -1,0 +1,120 @@
+Topic 1: Express Routing
+User (Medina):
+
+js
+app.get("/", async (req, res) => {
+  const title = "Home";
+  res.render("home", { title });
+});
+Coach:  
+Why did you choose to structure your Express route the way you did?
+
+User:  
+The reason was to respond to the user when accessing my page.
+
+Topic 2: JavaScript Language Principles
+User (Medina):
+
+js
+getData() {
+  return fetch(this.path)
+    .then(convertToJson)
+    .then((data) => data);
+}
+Coach:  
+When you wrote that function, how did you decide whether to use a callback versus a promise/async‑await?
+
+User:  
+I was applying promises, callbacks, and scope.
+
+Coach:  
+If you rewrote this with async/await, what would be the main advantage?
+
+User:  
+I would expect to customize the error message.
+
+Topic 3: EJS Partials and Pages
+User (Medina):
+
+ejs
+<%- include('partials/header') %>
+<main>
+    <h1>
+        <%= title %>
+    </h1>
+    <!-- Put your page-specific content here -->
+</main>
+<%- include('partials/footer') %>
+Coach:  
+When you decided to use EJS partials, what benefit were you aiming for?
+
+User:  
+Partials allow us to add only specific information related to the page. All repeated code is written once with the same pattern.
+
+Topic 4: Frontend CSS
+User (Medina):
+
+css
+html,
+body {
+  background-color: #f5f9fc;
+  font-family: "Segoe UI", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+nav {
+  background-color: #0066cc;
+  padding: 10px 20px;
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #ffdd00;
+}
+Coach:  
+Which part contributes most to making the site feel professional?
+
+User:  
+Everything is important for making the site professional.
+
+Wrap‑Up
+Coach:  
+Summary of strengths:
+
+Clean Express routing with dynamic data.
+
+Solid grasp of promises and scope.
+
+Effective use of EJS partials for reusability.
+
+Professional CSS with layout, color, and typography.
+
+Areas to practice:
+
+Try async/await for readability and error handling.
+
+Add more dynamic data into EJS templates.
+
+Explore responsive CSS techniques.
+
+Experiment with parameterized routes in Express.
+
+Coach (closing):  
+Looking back, which area do you feel most confident about, and which one needs the most practice?
+
+User:  
+I don’t know exactly, but I guess I should start with Express as I am new in that concept.

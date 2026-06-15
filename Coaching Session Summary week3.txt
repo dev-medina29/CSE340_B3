@@ -1,0 +1,36 @@
+Coaching Session Summary
+Topic 1: Models
+
+You demonstrated how to use parameterized queries with $1 in your model functions.
+
+This makes queries reusable and secure, avoiding SQL injection and keeping code clean.
+
+Topic 2: Views
+
+You shared an EJS snippet with a form for creating organizations.
+
+We discussed how to dynamically insert data into links using <%= org.id %> inside a forEach loop.
+
+This allows your views to render lists of organizations with links to their detail pages.
+
+Topic 3: Controllers
+
+You provided an Express router setup with routes like /organization/:id.
+
+Using route parameters (:id) makes controllers flexible and allows fetching specific records without hardcoding.
+
+You also showed how GET and POST routes handle displaying forms and processing submissions.
+
+Topic 4: Error Handling
+
+You shared a 404 error page that informs users when a page doesn’t exist and guides them back to the homepage.
+
+This ensures a professional and user-friendly experience when something goes wrong.
+
+Extension: Dashboard Idea
+
+You set a concrete next goal: building a user dashboard.
+
+The dashboard will serve both as a summary page (showing key info like name and userID) and a navigation hub (linking to projects, organizations, etc.).
+
+You decided to start with /dashboard/:userId for clarity and flexibility, beginning with basic info before expanding to related data.

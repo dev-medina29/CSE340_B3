@@ -35,6 +35,11 @@ VALUES
     FOREIGN KEY (organization_id) REFERENCES organization(organization_id)
 );
 -- Add the code to make the project_id serial;
+CREATE SEQUENCE serviceprojects_project_id_seq;
+ALTER TABLE ServiceProjects
+ALTER COLUMN project_id SET DEFAULT nextval('serviceprojects_project_id_seq');
+ALTER SEQUENCE serviceprojects_project_id_seq
+OWNED BY ServiceProjects.project_id;
 
 
 -- BrightFuture Builders Projects
@@ -133,3 +138,25 @@ INSERT INTO project_categories (project_id, category_id) VALUES (304, 5);
 
 -- Senior Care Visits → Community Support
 INSERT INTO project_categories (project_id, category_id) VALUES (305, 5);
+
+CREATE TABLE roles (
+    role_id SERIAL PRIMARY KEY,
+    role_name VARCHAR(50) UNIQUE NOT NULL,
+    role_description TEXT
+);
+
+INSERT INTO roles (role_name, role_description) VALUES 
+    ('user', 'Standard user with basic access'),
+    ('admin', 'Administrator with full system access');
+
+-- Verify the data was inserted
+SELECT * FROM roles;
+
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    role_id INTEGER REFERENCES roles(role_id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

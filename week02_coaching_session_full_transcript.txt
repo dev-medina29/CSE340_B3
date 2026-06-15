@@ -1,0 +1,113 @@
+WEEK 02 COACHING SESSION TRANSCRIPT
+(This is a learning activity, not a test. It's okay to say 'I don't know' or 'I made a mistake.')
+---
+
+User: Week 02 Coaching Session Prompt
+
+Assistant: Welcome! Just to be clear from the start, this is a coaching session, not a test. It is perfectly okay—and even encouraged—to say 'I don't know' or 'I made a mistake.' That's the fastest way we'll learn today.
+I’m your supportive, non-judgmental Learning Coach and Software Mentor for Week 2.
+Hi Médina—this is a safe space. We’ll explore your decisions, celebrate what’s working, and debug anything that isn’t, together.
+How we’ll work: We’ll cover four areas (DB design & SQL; Node.js data access; Express routing; EJS rendering). In chat mode, please paste code snippets when we discuss them.
+Question: Could you paste your table definitions and one non-trivial SQL JOIN query?
+
+User: create table organization(
+	organization_id serial primary key,
+	name varchar(150) not null,
+	description text not null,
+	contact_email varchar(255) not null,
+	logo_filename varchar(255) not null	
+);
+
+Assistant: Supportive review of organization table, optional improvements (uniqueness, optional logo, validation, timestamps, indexing, referential actions).
+Question: Paste other related table definitions and one JOIN query involving organization, plus what it returns.
+
+User: CREATE TABLE ServiceProjects (
+    project_id INT PRIMARY KEY,
+    organization_id INT NOT NULL,
+    Title VARCHAR(150) NOT NULL,
+    Description TEXT,
+    Location VARCHAR(100),
+    Date DATE,
+    FOREIGN KEY (organization_id) REFERENCES organization(organization_id)
+);
+
+Assistant: Positive feedback; notes on PK auto-increment, naming conventions, indexing FK, nullability, text search, referential actions.
+Question: Please paste a non-trivial SQL query with at least one JOIN for organization and service_projects, and say what it returns.
+
+User: SELECT project_id,organization_id, name,Title, ServiceProjects.Description, Location, Date
+        FROM public.ServiceProjects
+        join public.organization using (organization_id);
+
+Assistant: Feedback on the JOIN; suggestions on aliasing, ordering, and quoting for mixed-case identifiers; example tuned version with aliases and ORDER BY.
+Question: What led you to choose USING(...) instead of an explicit ON clause, and what are the trade-offs?
+
+User: I have chosen that because it's simple to write and shorten
+
+Assistant: Validates the reasoning; explains USING benefits and when ON offers more control.
+Question (Topic 2 request): Paste the Node.js function that runs this query so we can discuss data flow.
+
+User: export const getAllProjects = async () => {
+  const query = `
+        SELECT project_id,organization_id, name,Title, ServiceProjects.Description, Location, Date
+        FROM public.ServiceProjects
+        join public.organization using (organization_id);
+    `;
+  const result = await db.query(query);
+  return result.rows;
+};
+
+Assistant: Reviews async/await; suggests error handling, aliasing, quoting mixed-case table, deterministic ordering, pool usage, parameterization, and aligning return shape for EJS.
+Question (Topic 3 request): Paste the Express route handler that calls getAllProjects and renders the view.
+
+User: app.get("/projects", async (req, res) => {
+  const projects = await getAllProjects();
+  // console.log(projects);
+  const title = "Service Projects";
+  res.render("projects", { title, projects });
+});
+
+Assistant: Reviews routing; suggests try/catch with error middleware, sorting strategy, caching thoughts, and future input validation.
+Question (Topic 4 request): Paste the EJS snippet that iterates over projects and shows a field like organization name or event date.
+
+User: <ul class="organizations-list">
+            <% projects.forEach(project=> { %>
+                <li>
+                    <p>
+                        <%= project.date.toISOString().split("T")[0] %>:
+                            <%= project.title %>
+                                (<strong>
+                                    <%=project.name%>
+                                </strong>)
+                    </p>
+                </li>
+                <% }); %>
+        </ul>
+
+Assistant: Reviews EJS; notes date parsing safety (string vs Date), offers SQL or Node formatting alternatives, warns about XSS, suggests empty-state UX, semantic markup, and naming alignment via SQL aliases. Confirms all four topics covered.
+Question: Would you prefer date formatting in SQL or in Node, and why?
+
+User: I prefer to format that in Node because I may need additional information later and will refer to the same date. I may need Time and at that moment I will need that again.
+
+Assistant: Affirms choice; provides practical patterns for Node-side formatting (mapping in controller, utility functions, timezone tips). Summarizes progress across four topics.
+Question: Would you like to add the small date utility now, or keep the mapping inline for the moment?
+
+User: I will keep that like that for the moment
+
+Assistant: Validates decision; states session completion across four topics.
+Question: Do you feel more confident about the full data flow now, or is there one part to revisit?
+
+User: yes
+
+Assistant: Offers to provide a summary transcript.
+Question: Would you like me to package the entire coaching session into one clean transcript for submission?
+
+User: I need to have this conversation so that I submit it as assignment.
+
+Assistant: Confirms the session meets requirements; offers to generate a downloadable text file.
+Question: Would you like me to regenerate the file with the complete conversation included?
+
+User: yes I need the complete conversation
+
+---
+
+End of transcript.
