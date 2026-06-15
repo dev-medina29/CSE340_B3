@@ -8,14 +8,11 @@
         </p>
         <p>Username: <%= email %>
         </p>
-
-        <% if (user && user.role_name === 'admin') { %>
-            <div class="admin-actions">
-                <a href="/users" class="btn">Manage All Users</a>
+        <% if (user && user.role_name==='admin' ) { %>
             <div class="button-container">
                 <a href="/users" class="btn-action">Manage All Users</a>
             </div>
-        <% } %>
+            <% } %>
     </main>
 
     <%- include('partials/footer') %>
