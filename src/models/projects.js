@@ -104,3 +104,21 @@ export const updateProject = async (
 
   return result.rows[0]; // returns the updated project_id
 };
+
+export const createVolunteer = async (user_id, project_id) => {
+  const query = `insert into volunteers (user_id,project_id)
+  values ($1,$2),
+  returning user_id
+   `;
+  const params = [user_id, project_id];
+  const result = await db.query(query, params);
+
+  if (result.rows.length === 0) {
+    throw new Error("Failed to create a volunteer");
+  }
+
+  if (process.env.ENABLE_SQL_LOGGING === "true") {
+    console.log("Created new volunteer with ID:", result.rows[0].user_id);
+  }
+};
+

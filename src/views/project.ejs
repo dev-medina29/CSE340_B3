@@ -32,5 +32,11 @@
                 <a href="/edit-project/<%= projectDetails.project_id %>" class="btn-action">Edit Project</a>
             </div>
             <% } %>
+                <% if (isLoggedIn==true){%>
+                    <div class="vol">
+                        <a href="/project/<%= projectDetails.project_id %>">Volunteer to this project</a>
+                    </div>
+
+                    <%}%>
     </main>
     <%- include('./partials/footer') %>

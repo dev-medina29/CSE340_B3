@@ -160,3 +160,10 @@ CREATE TABLE users (
     role_id INTEGER REFERENCES roles(role_id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+create table volunteers (
+user_id int references users(user_id),
+project_id int references ServiceProjects(project_id),
+volunteered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+primary key (user_id,project_id)
+);

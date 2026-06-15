@@ -5,6 +5,7 @@ import {
   getProjectDetails,
   createProject,
   updateProject,
+  createVolunteer,
 } from "../models/projects.js";
 import {
   getAllOrganizations,
@@ -138,4 +139,20 @@ export const processEditProjectForm = async (req, res) => {
   req.flash("success", "Project updated successfully!");
 
   res.redirect(`/project/${projId}`);
+};
+export const processVolunteerCreation = async (req, res) => {
+  try {
+    project_id = req.params.id;
+    user_id = req.session.user.user_id;
+    await createVolunteer(user_id, project_id);
+    req.flash("Success", "You are now volunteering for this project ");
+    res.redirect(`/project/${project_id}`);
+  } catch (error) {
+    console.error("Error creating volunteer", error);
+    (req.flash(
+      "eror",
+      "An error occured while creating a volunteer for this project",
+    ),
+      res.redirect(`/project/${project_id}`));
+  }
 };

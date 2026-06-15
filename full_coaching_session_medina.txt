@@ -1,0 +1,91 @@
+FULL COACHING SESSION TRANSCRIPT
+
+Coach: Welcome! Just to be clear from the start, this is a coaching session, not a test. It is perfectly okay—and even encouraged—to say 'I don’t know' or 'I made a mistake.' That’s the fastest way we’ll learn today.
+
+Coach: What name would you like me to use for you during this session?
+Medina: medina
+
+Coach: Great to meet you, Medina. Please paste a non-trivial code snippet where your server handles a form submission.
+Medina:
+export const processEditCategoryForm = async (req, res) => {
+  const categoryId = req.params.id;
+  const results = validationResult(req);
+  if (!results.isEmpty()) {
+    results.array().forEach((error) => {
+      req.flash("error", error.msg);
+    });
+    return res.redirect("/edit-category/" + req.params.id);
+  }
+
+  const { name } = req.body;
+
+  try {
+    await updateCategory(categoryId, name);
+    req.flash("success", "Category updated successfully!");
+    res.redirect(`/category/${categoryId}`);
+  } catch (error) {
+    console.error("Error updating category:", error);
+    req.flash("error", "There was an error updating the category.");
+    res.redirect("/edit-category/" + categoryId);
+  }
+};
+
+Coach: When this line runs — const { name } = req.body; — where does that data come from?
+Medina: the data will come from a form and to work properly we need to import the related Express feature
+
+Coach: In your form, what is the name attribute and why must it match?
+Medina: I don't understand
+
+Coach: (Explained relationship between form name and req.body)
+
+Coach: What happens if we use res.render() and refresh?
+Medina: we may have duplicate form submissions if we refresh the page while using res.render()
+
+Coach: Please paste your EJS edit form snippet.
+Medina:
+<%- include('partials/header') %>
+<main>
+  <h1><%= title %></h1>
+  <form action="/edit-category/<%= category.category_id %>" method="POST">
+    <div class="form-group">
+      <label for="name">Category Name</label>
+      <input type="text" id="name" name="name" value="<%= category.category %>" maxlength="100" required />
+    </div>
+    <button type="submit">Update Category</button>
+  </form>
+</main>
+<%- include('partials/footer') %>
+
+Coach: Why pre-fill input values?
+Medina: It's important to make notice the user that the category has already some data before editing
+
+Coach: Please paste flash/session setup.
+Medina: (Custom flash middleware code provided)
+
+Coach: Please paste validation code.
+Medina:
+export const organizationValidation = [
+  body("name")
+    .trim()
+    .notEmpty()
+    .withMessage("Organization name is required")
+    .isLength({ min: 3, max: 150 })
+    .withMessage("Organization name must be between 3 and 150 characters"),
+  body("description")
+    .trim()
+    .notEmpty()
+    .withMessage("Organization description is required")
+    .isLength({ max: 500 })
+    .withMessage("Organization description cannot exceed 500 characters"),
+  body("contactEmail")
+    .normalizeEmail()
+    .notEmpty()
+    .withMessage("Contact email is required")
+    .isEmail()
+    .withMessage("Please provide a valid email address"),
+];
+
+Coach: Why use .trim() before .notEmpty()?
+Medina: we need to use .trim() before to remove space in the string and then we use .notEmpty() to check if it's empty and then .isLength() to check if it's not 0
+
+END OF SESSION
