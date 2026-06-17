@@ -235,11 +235,14 @@ a:hover {
   padding: 10px 20px;
   background-color: #1e5ba8;
   color: #ffffff;
-  text-decoration: none !important;
+  text-decoration: none;
   border-radius: 6px;
   font-weight: 600;
   transition: all 0.3s ease;
   border: 2px solid #1e5ba8;
+}
+.dash a {
+  color: #ffffff;
 }
 .vol {
   display: inline-block;

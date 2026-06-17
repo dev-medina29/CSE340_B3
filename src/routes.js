@@ -27,6 +27,8 @@ import {
   showEditProjectForm,
   processEditProjectForm,
   projectValidation,
+  processVolunteerCreation,
+  processVolunteerDeletion,
 } from "./controllers/projects.js";
 import { homePage } from "./controllers/index.js";
 import { errorsPage } from "./controllers/errors.js";
@@ -41,6 +43,7 @@ import {
   requireRole,
   showAllUsers,
 } from "./controllers/users.js";
+import { createVolunteer } from "./models/projects.js";
 const router = express.Router();
 
 router.get("/projects", projectsPage);
@@ -131,5 +134,9 @@ router.get("/dashboard", requireLogin, showDashboard);
 
 // Protected user management route
 router.get("/users", requireRole("admin"), showAllUsers);
+
+// Final feature
+router.get("/project/:id/volunteer", requireLogin, processVolunteerCreation);
+router.get("/project/:id/unvolunteer", requireLogin, processVolunteerDeletion);
 
 export default router;

@@ -34,7 +34,12 @@
             <% } %>
                 <% if (isLoggedIn==true){%>
                     <div class="vol">
-                        <a href="/project/<%= projectDetails.project_id %>">Volunteer to this project</a>
+                        <% if (isVolunteer) { %>
+                            <a href="/project/<%= projectDetails.project_id %>/unvolunteer">Not to be volunteer</a>
+                            <% } else { %>
+                                <a href="/project/<%= projectDetails.project_id %>/volunteer">Volunteer to this
+                                    project</a>
+                                <% } %>
                     </div>
 
                     <%}%>

@@ -107,8 +107,8 @@ export const updateProject = async (
 
 export const createVolunteer = async (user_id, project_id) => {
   const query = `insert into volunteers (user_id,project_id)
-  values ($1,$2),
-  returning user_id
+  values ($1,$2)
+  returning user_id, project_id
    `;
   const params = [user_id, project_id];
   const result = await db.query(query, params);
@@ -121,4 +121,18 @@ export const createVolunteer = async (user_id, project_id) => {
     console.log("Created new volunteer with ID:", result.rows[0].user_id);
   }
 };
+export const removeVolunteer = async (user_id, project_id) => {
+  const query = `delete from volunteers 
+  where user_id=$1 and project_id=$2;`;
+  const queryParams = [user_id, project_id];
+  const result = await db.query(query, queryParams);
+  return result.rows[0];
+};
 
+export const isAlreadyVolunteer = async (user_id, project_id) => {
+  const query = `select user_id from volunteers where user_id=$1 and project_id=$2`;
+  const queryParams = [user_id, project_id];
+  const result = await db.query(query, queryParams);
+  console.log(result.rows);
+  return result.rows.length > 0;
+};
