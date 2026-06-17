@@ -68,4 +68,14 @@ export const authenticateUser = async (email, password) => {
   return user;
 };
 
+export const VolunteerProject = async (id) => {
+  const query = `select title, project_id 
+  from ServiceProjects 
+  join volunteers using(project_id) 
+  where user_id=$1 `;
+  const params = [id];
+  const result = await db.query(query, params);
+  return result.rows;
+};
+
 export { createUser };

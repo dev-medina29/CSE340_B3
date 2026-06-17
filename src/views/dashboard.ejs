@@ -13,6 +13,21 @@
                 <a href="/users" class="btn-action">Manage All Users</a>
             </div>
             <% } %>
+                <% if (hasProject) { %>
+                    <p> Here are Projects that you volunteer for:</p>
+                    <ul>
+                        <% listVolProj.forEach(proj=> { %>
+                            <li>
+                                <%= proj.title %>
+                                    <a href="/project/<%= proj.project_id %>/unvolunteer">Not to be Volunteer</a>
+                            </li>
+                            <% }) %>
+                    </ul>
+                    <% } else { %>
+                        <p>You are not volunteer to any project <a href="/projects">See projects</a></p>
+                        <% } %>
+
+
     </main>
 
     <%- include('partials/footer') %>
